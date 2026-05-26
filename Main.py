@@ -19,5 +19,17 @@ def recrutari_club():
 def recrutari_festival():
     return redirect(LINK_FORMS_FESTIVAL)
 
+@app.route('/promo')
+def promo():
+    return render_template('promo.html')
+
+@app.route('/despre-noi')
+def despre():
+    return render_template('despre.html')
+
+@app.route('/galerie')
+def galerie():
+    return render_template('galerie.html')
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

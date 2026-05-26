@@ -1,439 +1,406 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overthink - Club de Film & Festival</title>
-    <style>
-        /* Reset & Stiluri Generale */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recrutări - Overthink JR.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:black;color:white;}
 
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+/* ---------- Top Bar ---------- */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:50px;
+  background:#222;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px; 
+  z-index:1000;
+}
+.topbar img{height:35px;}
+.topbar-nav {display: flex; gap: 15px;}
+.topbar-nav a{
+  color:white;
+  background:#920404;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+  display:inline-block;
+  border-radius:6px;
+  padding:4px 10px;
+}
+.topbar-nav a:hover{background:#b00606;}
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+/* ---------- 1. BANER (TITLU + MOTTO) ---------- */
+.hero-banner{
+  position:relative;
+  height:60vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  /* Încarcă imaginea de fundal din folderul static */
+  background:#111 url("{{ url_for('static', filename='FOTO/WhatsApp Image 2025-09-05 at 12.53.59.jpeg') }}") no-repeat center/cover;
+  padding:20px;
+  margin-top:50px;
+  text-align:center;
+  border-bottom: 3px solid #920404;
+}
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+.hero-content h1{
+  color:#920404;
+  font-size:3.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+.hero-content p{
+  font-size:1.4rem;
+  font-style: italic;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+}
 
-        /* Navigare */
-        header {
-            background-color: rgba(18, 18, 18, 0.95);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #222;
-        }
+/* ---------- 2. PREZENTARE GENERALĂ ---------- */
+.prezentare {
+  background:#111;
+  padding:60px 20px;
+  text-align:center;
+  border-bottom: 1px solid #222;
+}
+.prezentare-container {
+  max-width:850px;
+  margin:0 auto;
+  background: #050505;
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid #222;
+}
+.prezentare h2 {
+  font-size:2rem;
+  margin-bottom:20px;
+  color:#920404;
+}
+.prezentare p {
+  font-size:1.15rem;
+  line-height:1.7;
+  color: #ccc;
+}
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-        }
+/* ---------- BULE DE MOTIVARE ---------- */
+.bule-sectiune {
+  padding: 30px 20px;
+  background: #0a0a0a;
+}
+.bule-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.bula {
+  background: #222;
+  border: 2px solid #920404;
+  padding: 15px 25px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #fff;
+  transition: 0.3s ease;
+}
+.bula:hover {
+  background: #920404;
+  transform: scale(1.05);
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #E50914;
-        }
+/* ---------- STRUCTURĂ SECȚIUNI ---------- */
+.sectiune-continut {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.sectiune-continut h2 {
+  font-size: 2.2rem;
+  color: #920404;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.sectiune-descriere {
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #ccc;
+  margin-bottom: 40px;
+}
 
-        .logo span {
-            color: #fff;
-        }
+/* ---------- DETALII FESTIVAL (TIMELINE) ---------- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.timeline-day {
+  background: #111;
+  padding: 25px;
+  border-radius: 10px;
+  border-left: 5px solid #920404;
+}
+.timeline-day h4 {
+  color: #920404;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.festival-meta {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.meta-item {
+  background: #222;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  border: 1px solid #920404;
+}
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
+/* ---------- DETALII CLUB (DEPARTAMENTE GRID) ---------- */
+.departamente-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.card-departament {
+  background: #111;
+  padding: 25px;
+  border-radius: 8px;
+  border-top: 4px solid #920404;
+}
+.card-departament h3 {
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: 1.3rem;
+}
+.card-departament ul {
+  list-style: square inside;
+  color: #bbb;
+  line-height: 1.6;
+}
 
-        .nav-menu a:hover {
-            color: #E50914;
-            transition: 0.3s;
-        }
+/* ---------- BUTOANE DE ACȚIUNE ---------- */
+.actiuni-sectiune {
+  padding: 70px 20px;
+  text-align: center;
+  background: #111;
+  border-top: 1px solid #222;
+}
+.actiuni-sectiune h2 {
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+.actiuni-sectiune p {
+  color: #aaa;
+  margin-bottom: 40px;
+}
+.btn-grid-recrutari {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 750px;
+  margin: 0 auto 35px auto;
+}
+.btn-recrutare {
+  padding: 22px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.btn-recrutare.club {
+  background: #920404;
+  border: 2px solid #920404;
+}
+.btn-recrutare.club:hover {
+  background: #b00606;
+  transform: translateY(-3px);
+}
+.btn-recrutare.festival {
+  background: transparent;
+  border: 2px solid #920404;
+}
+.btn-recrutare.festival:hover {
+  background: #920404;
+  transform: translateY(-3px);
+}
+.btn-galerie {
+  display: inline-block;
+  max-width: 400px;
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  color: #888;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 2px solid #333;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.btn-galerie:hover {
+  border-color: white;
+  color: white;
+}
 
-        /* Sectiune Hero */
-        .hero {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: linear-gradient(rgba(18,18,18,0.7), #121212), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop') center/cover no-repeat;
-            margin-top: 60px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin-bottom: 30px;
-            color: #ccc;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            font-weight: bold;
-            border-radius: 5px;
-            text-transform: uppercase;
-            transition: 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-club {
-            background-color: #E50914;
-            color: #fff;
-        }
-
-        .btn-club:hover {
-            background-color: #b80710;
-            transform: scale(1.05);
-        }
-
-        .btn-fest {
-            background-color: #FFC107;
-            color: #000;
-        }
-
-        .btn-fest:hover {
-            background-color: #e0a800;
-            transform: scale(1.05);
-        }
-
-        /* Sectiuni Continut */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: #E50914;
-            margin: 10px auto 0;
-        }
-
-        .experience-text {
-            max-width: 900px;
-            margin: 0 auto 50px;
-            text-align: center;
-            font-size: 1.1rem;
-            color: #ddd;
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 8px;
-            border-left: 5px solid #E50914;
-        }
-
-        /* Grila Departamente */
-        .departments-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 60px;
-        }
-
-        .dept-card {
-            background-color: #1a1a1a;
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
-
-        .dept-card:hover {
-            transform: translateY(-5px);
-            border-color: #E50914;
-        }
-
-        .dept-card h3 {
-            margin-bottom: 15px;
-            color: #E50914;
-            font-size: 1.4rem;
-        }
-
-        .dept-tags {
-            margin-top: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            background-color: #2a2a2a;
-            padding: 4px 8px;
-            font-size: 0.8rem;
-            border-radius: 4px;
-            color: #bbb;
-        }
-
-        /* Palmares / Rezultate */
-        .results-section {
-            background-color: #1a1a1a;
-            padding: 40px 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .results-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            list-style: none;
-        }
-
-        .results-list li {
-            font-size: 1.1rem;
-            background: #222;
-            padding: 15px 20px;
-            border-radius: 5px;
-            border-bottom: 3px solid #E50914;
-        }
-
-        /* Sectiunea Festival */
-        .festival-zone {
-            border-top: 2px dashed #333;
-            padding-top: 60px;
-            margin-top: 60px;
-        }
-
-        .festival-zone .section-title::after {
-            background-color: #FFC107;
-        }
-
-        .fest-info {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-size: 1.2rem;
-        }
-
-        .fest-details {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .detail-box {
-            background: #222;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            border: 1px solid #FFC107;
-        }
-
-        /* Program pe zile */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 50px;
-        }
-
-        .timeline-day {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 5px solid #FFC107;
-        }
-
-        .timeline-day h4 {
-            color: #FFC107;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #0b0b0b;
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid #222;
-            margin-top: 80px;
-        }
-
-        footer p {
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .footer-link {
-            color: #E50914;
-            font-weight: bold;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-menu { display: none; } /* Pentru simplitate pe mobile */
-            .hero h1 { font-size: 2rem; }
-            .section-title { font-size: 2rem; }
-        }
-    </style>
+/* ---------- Responsive Mobile ---------- */
+@media(max-width:768px){
+  .hero-content h1{font-size:2.3rem;}
+  .prezentare-container {padding: 20px;}
+  .btn-grid-recrutari {grid-template-columns: 1fr;}
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <div class="logo">OVERTHINK<span>.jr</span></div>
-            <ul class="nav-menu">
-                <li><a href="#club">Recrutări Club</a></li>
-                <li><a href="#departamente">Departamente</a></li>
-                <li><a href="#festival">Overthink Film Fest</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <section class="hero">
-        <h1>Singurul club de film din Bacău</h1>
-        <p>Transformăm pasiunea în realitate cinematografică. Fie că vrei să fii în spatele camerei, pe set sau în lumina reflectoarelor, locul tău e aici.</p>
-        <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-            <a href="#club-apply" class="btn btn-club">Alătură-te Clubului</a>
-            <a href="#fest-apply" class="btn btn-fest">Devino Voluntar Festival</a>
-        </div>
-    </section>
-
-    <div class="container" id="club">
-        <h2 class="section-title">Viața în Overthink</h2>
-        <div class="experience-text">
-            <p>La început am fost doar noi și niște ateliere intense unde am învățat regulile jocului. Ne-am unit mergând la colindat, iar banii strânși i-am investit în echipamente care ne ajută să creștem de la proiect la proiect. De la filmările pline de adrenalină pentru promo-urile de Halloween și Crăciun, până la nopțile lungi de montaj, Overthink înseamnă prietenie strânsă și mândria de a vedea rezultatul muncii tale pe ecran.</p>
-        </div>
-
-        <h2 class="section-title" id="departamente">Departamentele Noastre</h2>
-        <div class="departments-grid">
-            <div class="dept-card">
-                <h3>Creativ</h3>
-                <p>Se ocupă de concepte vizuale și crearea lor. Dacă ești o persoană creativă pasionată de scris sau orice formă de bricolaj, pictat sau cusut, te așteptăm.</p>
-                <div class="dept-tags">
-                    <span class="tag">Regie</span>
-                    <span class="tag">Scenariu</span>
-                </div>
-            </div>
-
-            <div class="dept-card">
-                <h3>Tehnic</h3>
-                <p>Transformă viziunea artistică în realitate. Tot ce înseamnă partea vizuală și audio trece prin mâinile tale: filmare, editare, sunet și fotografie.</p>
-                <div class="dept-tags">
-                    <span class="tag">Imagine</span>
-                    <span class="tag">Lumini</span>
-                    <span class="tag">Sunet</span>
-                    <span class="tag">Montaj</span>
-                    <span class="tag">SFX & Coloană Sonoră</span>
-                </div>
-            </div>
-
-            <div class="dept-card">
-                <h3>Cast & Estetică</h3>
-                <p>Aduce personajele la viață prin talent actoricesc alături de mentora noastră, profesoara Frânculescu Cristina, dar și prin design-ul setului și al actorilor.</p>
-                <div class="dept-tags">
-                    <span class="tag">Actori</span>
-                    <span class="tag">Make-up</span>
-                    <span class="tag">Scenografie</span>
-                    <span class="tag">Costume</span>
-                </div>
-            </div>
-
-            <div class="dept-card">
-                <h3>Producție</h3>
-                <p>Motorul practic al clubului. Coordonează logistica și planificarea fiecărui proiect. Se asigură că ideile creative au resursele necesare pentru a prinde viață.</p>
-                <div class="dept-tags">
-                    <span class="tag">Logistisă</span>
-                    <span class="tag">Resurse</span>
-                    <span class="tag">Marketing</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="results-section">
-            <h2>Rezultatele Noastre pe Măsură</h2>
-            <ul class="results-list">
-                <li> 2 ani de participări la Boovie (Mențiune în anul precedent)</li>
-                <li> Premiul pentru "Cea mai bună interpretare feminină" (2 ani la rând la Cinedrama)</li>
-                <li> Premii la Concursul Național Antidrog, Învingători prin Artă și Cinecopilăria</li>
-            </ul>
-        </div>
-
-        <div class="festival-zone" id="festival">
-            <h2 class="section-title">Overthink Film Fest</h2>
-            <div class="fest-info">
-                <p>Un proiect de suflet desfășurat pe parcursul a 3 zile, dedicat în totalitate adolescenților, liceenilor și studenților pasionați de cinematografie. Te așteaptă workshopuri acreditate cu oameni din domeniu și proiecții interactive.</p>
-            </div>
-            
-            <div class="fest-details">
-                <div class="detail-box"> 7-9 August</div>
-                <div class="detail-box"> Insula de Agrement, Hub Orizont & Teatrul Bacovia</div>
-            </div>
-
-            <div class="timeline">
-                <div class="timeline-day">
-                    <h4>Ziua 1 — Deschiderea Oficială</h4>
-                    <p>Festivitatea de deschidere, momente artistice de excepție și proiecțiile de seară amplasate pe insulița mică.</p>
-                </div>
-                <div class="timeline-day">
-                    <h4>Ziua 2 — Ateliere & Ficțiune</h4>
-                    <p>Prima serie de ateliere practice. Proiecții de scurtmetraje de ficțiune (liceene și studențești), urmate de documentare și proiecția mult așteptată de pe insulă.</p>
-                </div>
-                <div class="timeline-day">
-                    <h4>Ziua 3 — Concluzii & Corturi Interactive</h4>
-                    <p>O nouă serie în forță de ateliere și proiecții. Pe parcursul festivalului te poți bucura zilnic de corturile noastre tematice: Artă, Muzică, Foto, Video și Literatură.</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 40px; background: #1a1a1a; padding: 40px; border-radius: 8px;" id="club-apply">
-                <h3 style="margin-bottom: 20px;">Ești gata să faci următorul pas?</h3>
-                <p style="margin-bottom: 30px; color: #aaa;">Aplicațiile pentru recrutările în club și pentru voluntariatul la festival sunt acum deschise!</p>
-                <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-    <a href="/recrutari-club" target="_blank" class="btn btn-club">Aplică în Club</a>
-    <a href="/recrutari-festival" target="_blank" class="btn btn-fest" id="fest-apply">Aplică Voluntar Festival</a>
+<div class="topbar">
+  <img src="{{ url_for('static', filename='FOTO/LOGOtaiat.svg') }}" alt="Logo">
+  <nav class="topbar-nav">
+    <a href="/">Acasa</a> 
+    <a href="/despre-noi">Despre Noi</a>
+  </nav>
 </div>
-                <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">Mai avem și alte departamente specifice festivalului... dar restul rămâne o surpriză! </p>
-            </div>
 
-        </div>
+<header class="hero-banner">
+  <div class="hero-content">
+    <h1>RECRUTĂRI OVERTHINK JR.</h1>
+    <p>„Singurul club de film din Bacău unde ideile tale prind viață pe ecran.”</p>
+  </div>
+</header>
+
+<section class="prezentare">
+  <div class="prezentare-container">
+    <h2>Cine suntem noi?</h2>
+    <p>La început am fost doar noi și niște ateliere în care am învățat regulile de bază din cinema. Ne-am unit mergând la colindat împreună, iar bănuții strânși i-am reinvestit inteligent în echipamente profesionale. Suntem mândri de comunitatea, festivalul și prieteniile strânse pe care le-am legat la filmări.</p>
+  </div>
+</section>
+
+<section class="bule-sectiune">
+  <div class="bule-container">
+    <div class="bula">🔥 Mențiune Specială la Boovie</div>
+    <div class="bula">🏆 Cea mai bună interpretare feminină la Cinedrama</div>
+    <div class="bula">🎬 Echipamente Profesionale Proprii</div>
+    <div class="bula">🍿 Comunitate strânsă & Prietenii adevărate</div>
+  </div>
+</section>
+
+<section class="sectiune-continut">
+  <h2>Overthink Film Fest 🎟️</h2>
+  <p class="sectiune-descriere">Un proiect de suflet desfășurat pe parcursul a 3 zile pline, conceput special pentru adolescenți (liceeni și studenți). Te așteaptă workshopuri acreditate cu oameni din industrie, corturi tematice interactive și proiecții nocturne pe Insulă.</p>
+  
+  <div class="festival-meta">
+    <div class="meta-item">📅 7 - 9 August</div>
+    <div class="meta-item">📍 Insula de Agrement, Hub Orizont & Teatrul Bacovia</div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-day">
+      <h4>Ziua 1 — Deschiderea Oficială</h4>
+      <p>Festivitatea de deschidere completată de momente artistice speciale și proiecțiile nocturne de film programate pe insulița mică.</p>
     </div>
+    <div class="timeline-day">
+      <h4>Ziua 2 — Ateliere & Scurtmetraje</h4>
+      <p>Prima serie de ateliere practice, urmată de proiecții de scurtmetraje de ficțiune studențești și liceene și o serie de documentare inedite.</p>
+    </div>
+    <div class="timeline-day">
+      <h4>Ziua 3 — Corturile Interactive & Finalul</h4>
+      <p>O începem în forță cu noi ateliere. Ca spectatori, vă puteți bucura zilnic de corturile tematice de pe insulă: Artă, Muzică, Foto, Video și Literatură.</p>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2026 Clubul de Film Overthink Bacău. Toate drepturile rezervate.</p>
-        <p>Vizitează site-ul nostru oficial: <a href="https://overthink-jr.com/" class="footer-link" target="_blank">overthink-jr.com</a></p>
-    </footer>
+<section class="sectiune-continut" style="border-top: 1px solid #222; padding-top: 60px;">
+  <h2>Clubul de Film Overthink Jr. 🎬</h2>
+  <p class="sectiune-descriere">Aici construim proiectele noastre cinematografice de la zero. Indiferent de gradul tău actual de experiență, dacă ești pasionat de film sau organizare, îți poți alege locul ideal în unul din departamentele noastre active:</p>
+  
+  <div class="departamente-grid">
+    <div class="card-departament">
+      <h3>Creativ ✍️</h3>
+      <ul>
+        <li>Regizori</li>
+        <li>Scenariști</li>
+      </ul>
+    </div>
+    <div class="card-departament">
+      <h3>Tehnic 📹</h3>
+      <ul>
+        <li>Imagine & Lumini</li>
+        <li>Sunet & Montaj Video</li>
+        <li>SFX și Coloană Sonoră</li>
+      </ul>
+    </div>
+    <div class="card-departament">
+      <h3>Cast 🎭</h3>
+      <ul>
+        <li>Actori (Pregătiți alături de mentori)</li>
+      </ul>
+    </div>
+    <div class="card-departament">
+      <h3>Estetică ✨</h3>
+      <ul>
+        <li>Make-up Artists</li>
+        <li>Scenografi & Costume</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="actiuni-sectiune">
+  <h2>Ești gata să te alături echipei?</h2>
+  <p>Aplicațiile sunt acum deschise. Alege rolul care ți se potrivește cel mai bine:</p>
+  
+  <div class="btn-grid-recrutari">
+    <a href="/recrutari-club" class="btn-recrutare club">
+      Aplică în Clubul de Film
+    </a>
+    
+    <a href="/recrutari-festival" class="btn-recrutare festival">
+      Voluntar la Festival
+    </a>
+  </div>
+  
+  <a href="/galerie" class="btn-galerie">Galerie Foto Proiecte</a>
+</section>
+
+<footer>
+  <p>&copy; 2026 Clubul de Film Overthink Junior. Toate drepturile rezervate.</p>
+</footer>
 
 </body>
 </html>

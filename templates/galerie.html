@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerie Foto - Overthink JR.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:black;color:white;}
+
+/* ---------- Top Bar ---------- */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:50px;
+  background:#222;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px; 
+  z-index:1000;
+}
+.topbar img{height:35px;}
+.topbar-nav {display: flex; gap: 15px;}
+.topbar-nav a{
+  color:white;
+  background:#920404;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+  display:inline-block;
+  border-radius:6px;
+  padding:4px 10px;
+}
+.topbar-nav a:hover{background:#b00606;}
+
+/* ---------- Header Pagina ---------- */
+.galerie-header {
+  margin-top: 90px;
+  text-align: center;
+  padding: 0 20px;
+}
+.galerie-header h1 {
+  font-size: 2.5rem;
+  color: #920404;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.galerie-header p {
+  color: #aaa;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ---------- Grid Galerie ---------- */
+.galerie-sectiune {
+  max-width: 1200px;
+  margin: 40px auto 60px auto;
+  padding: 0 20px;
+}
+.galerie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* ---------- Item Galerie (Card Foto) ---------- */
+.galerie-item {
+  position: relative;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #222;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.galerie-item:hover {
+  transform: translateY(-5px);
+  border-color: #920404;
+}
+
+/* Container imagine pentru a păstra proporțiile fixe (aspect ratio 16:9) */
+.galerie-img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* Raport 16:9 */
+  overflow: hidden;
+}
+.galerie-item img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; /* Taie imaginea frumos ca să umple spațiul */
+  transition: transform 0.5s ease;
+}
+.galerie-item:hover img {
+  transform: scale(1.08); /* Efect de zoom la hover */
+}
+
+/* Descriere sub fiecare poză */
+.galerie-info {
+  padding: 15px;
+  background: #0a0a0a;
+}
+.galerie-info h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.galerie-info p {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ---------- Buton Înapoi ---------- */
+.inapoi-container {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.btn-inapoi {
+  display: inline-block;
+  padding: 12px 30px;
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #920404;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.btn-inapoi:hover {
+  background: #920404;
+}
+
+footer{
+  text-align: center;
+  padding: 20px;
+  color: #505050;
+  font-size: 0.9rem;
+  border-top: 1px solid #111;
+}
+
+/* ---------- Responsive Mobile ---------- */
+@media(max-width:768px){
+  .galerie-header h1 { font-size: 2rem; }
+  .galerie-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img src="{{ url_for('static', filename='FOTO/LOGOtaiat.svg') }}" alt="Logo">
+  <nav class="topbar-nav">
+    <a href="/">Acasa</a> 
+    <a href="/despre-noi">Despre Noi</a>
+  </nav>
+</div>
+
+<header class="galerie-header">
+  <h1>Galerie Foto</h1>
+  <p>Aruncă o privire în culisele proiectelor noastre, momentele de la filmări și energia din cadrul festivalului.</p>
+</header>
+
+<section class="galerie-sectiune">
+  <div class="galerie-grid">
+    
+    <div class="galerie-item">
+      <div class="galerie-img-wrapper">
+        <img src="{{ url_for('static', filename='FOTO/logistica1.jpeg') }}" alt="Logistica 1">
+      </div>
+      <div class="galerie-info">
+        <h3>Departamentul Logistică</h3>
+        <p>Organizarea și pregătirea elementelor cheie pentru buna desfășurare a activităților.</p>
+      </div>
+    </div>
+
+    <div class="galerie-item">
+      <div class="galerie-img-wrapper">
+        <img src="{{ url_for('static', filename='FOTO/logistica2.jpg') }}" alt="Logistica 2">
+      </div>
+      <div class="galerie-info">
+        <h3>Planificare în Detaliu</h3>
+        <p>Munca de coordonare din spatele fiecărui eveniment de succes.</p>
+      </div>
+    </div>
+
+    <div class="galerie-item">
+      <div class="galerie-img-wrapper">
+        <img src="{{ url_for('static', filename='FOTO/tehnic poze.png') }}" alt="Echipa Tehnica">
+      </div>
+      <div class="galerie-info">
+        <h3>Echipa Tehnică</h3>
+        <p>Gestionarea aparaturii, setărilor de imagine și a suportului tehnic pe teren.</p>
+      </div>
+    </div>
+
+    <div class="galerie-item">
+      <div class="galerie-img-wrapper">
+        <img src="{{ url_for('static', filename='FOTO/WhatsApp Image 2025-09-05 at 12.53.59.jpeg') }}" alt="Productie Overthink">
+      </div>
+      <div class="galerie-info">
+        <h3>Producție & Cadre</h3>
+        <p>Momente imortalizate în timpul producțiilor noastre cinematografice.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="inapoi-container">
+  <a href="/" class="btn-inapoi">← Înapoi la Pagina Principală</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 Clubul de Film Overthink Junior. Toate drepturile rezervate.</p>
+</footer>
+
+</body>
+</html>
